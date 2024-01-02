@@ -10,7 +10,6 @@ const convertCurrencyController = require("./convert-currency/convert-currency.c
  * @endpoint GET /currency
  *
  */
-console.log("inside currency")
 router.get("/currency", listCurrencyController)
 router.post("/convert", convertCurrencyController)
 

@@ -1,7 +1,6 @@
 const axios = require("axios")
 
 module.exports = async (req, res) => {
-  console.log(req.body)
   const { source, amount, target } = req.body
   const URL = `https://api.coingecko.com/api/v3/simple/price?ids=${source}&vs_currencies=${target}`
   const response = await axios.get(URL)
