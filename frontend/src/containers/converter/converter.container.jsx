@@ -6,11 +6,12 @@ import "./coverter.css"
 const converter = () => {
   const [crypto, setCrypto] = useState([])
   const [currency, setcurrency] = useState([])
-  const [selectCrypto, setSelectCrypto] = useState("")
+  const [selectCrypto, setSelectCrypto] = useState({})
   const [selectCurrency, setSelectCurrency] = useState("")
   const [amount, setAmount] = useState("")
-  const [targetAmount, setTargetAmount] = useState("")
+  const [targetAmount, setTargetAmount] = useState(0)
 
+  //fetching list of crypto's and currencies
   useEffect(() => {
     const url = "http://localhost:3002/api/crypto/currency"
     axios.get(url).then((response) => {
@@ -18,6 +19,21 @@ const converter = () => {
       setcurrency(response.data.currency)
     })
   }, [])
+
+  //selecting default crypto and currency
+  useEffect(() => {
+    if (!Object.keys(selectCrypto).length && crypto.length) {
+      setSelectCrypto({ id: crypto[0].id, value: crypto[0].name })
+    }
+    if (!selectCurrency.length && currency.length) {
+      setSelectCurrency("usd")
+    }
+  }, [crypto, currency])
+
+  useEffect(() => {
+    console.log("selsectCrypto--", selectCrypto)
+    console.log("selsectCurrency--", selectCurrency)
+  }, [selectCrypto, selectCurrency])
 
   const handleCryptoChange = (e) => {
     e.preventDefault()
@@ -94,7 +110,7 @@ const converter = () => {
           </select>
           <button type="submit">Convert</button>
         </form>
-        <h1 id="result">{targetAmount}</h1>
+        <h1 id="result">{targetAmount + " " + selectCurrency}</h1>
       </div>
     </DefaultLayout>
   )
