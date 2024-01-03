@@ -13,7 +13,7 @@ const converter = () => {
 
   //fetching list of crypto's and currencies
   useEffect(() => {
-    const url = "http://localhost:3002/api/crypto/currency"
+    const url = "http://64.227.178.147:3002/api/crypto/currency"
     axios.get(url).then((response) => {
       setCrypto(response.data.crypto)
       setcurrency(response.data.currency)
@@ -54,7 +54,7 @@ const converter = () => {
 
   const convert = async (e) => {
     e.preventDefault()
-    const url = "http://localhost:3002/api/crypto/convert"
+    const url = "http://64.227.178.147:3002/api/crypto/convert"
     const response = await axios.post(url, {
       source: selectCrypto.id,
       amount: amount,
