@@ -13,7 +13,7 @@ const converter = () => {
 
   //fetching list of crypto's and currencies
   useEffect(() => {
-    const url = "http://64.227.178.147:3002/api/crypto/currency"
+    const url = "https://currency-converter-r5g2.vercel.app/api/crypto/currency"
     axios.get(url).then((response) => {
       setCrypto(response.data.crypto)
       setcurrency(response.data.currency)
@@ -29,11 +29,6 @@ const converter = () => {
       setSelectCurrency("usd")
     }
   }, [crypto, currency])
-
-  useEffect(() => {
-    console.log("selsectCrypto--", selectCrypto)
-    console.log("selsectCurrency--", selectCurrency)
-  }, [selectCrypto, selectCurrency])
 
   const handleCryptoChange = (e) => {
     e.preventDefault()
@@ -54,7 +49,7 @@ const converter = () => {
 
   const convert = async (e) => {
     e.preventDefault()
-    const url = "http://64.227.178.147:3002/api/crypto/convert"
+    const url = "https://currency-converter-r5g2.vercel.app/api/crypto/convert"
     const response = await axios.post(url, {
       source: selectCrypto.id,
       amount: amount,
